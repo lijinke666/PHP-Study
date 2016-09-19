@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><h2>你好！ThinkPHP</h2>

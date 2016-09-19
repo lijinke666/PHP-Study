@@ -1,0 +1,42 @@
+<extend name="Public:base"/>
+<block name="title">
+    <title>{$title}</title>
+</block>
+<block name="content">
+<form action="{:U('Index/update')}" method="post">
+<table border="1">
+    <tr>
+        <td><strong>id</strong></td>
+        <td><strong>收货地址</strong></td>
+        <td><strong>昵称</strong></td>
+        <td><strong>性别</strong></td>
+        <td><strong>操作</strong></td>
+    </tr>
+    <if condition="$detailData">
+    <foreach name="detailData" item="v">
+        <tr>
+            <td>{$v['i_u_id']}</td>
+            <td><input type="text" value="{$v['i_address']}" name="i_address"></td>
+            <td><input type="text" value="{$v['i_name']}" name="i_name"></td>
+            <td>{$v['i_sex']}</td>
+            <td><input type="submit" value="提交"></td>
+            <input type="hidden" value="{$v['i_u_id']}" name="i_u_id">
+        </tr>
+    </foreach>
+    <else />
+        <tr><td colspan="5" style="color:#FFF;">暂无数据</td></tr>
+    </if>
+    <tr>
+        <td colspan="5"><a href="{:U('Index/index')}">返回</a></td>
+    </tr>
+</table>
+</form>
+    <script>
+        window.onload=function(){
+            var tr =  document.querySelectorAll("tr");
+            for(var i=0; i<tr.length; i++){
+                tr[i*2+1].style.backgroundColor="rgba(0,0,0,0.2)";
+            }
+        }
+    </script>
+</block>

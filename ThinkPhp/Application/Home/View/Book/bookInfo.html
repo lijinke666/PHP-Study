@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$title}</title>
+    <style>
+        body{
+            text-align: center;
+            font-size:16px;
+            font-family: "Microsoft YaHei";
+        }
+    </style>
+</head>
+<body>
+<h2 style="text-align: center">书籍详情</h2>
+<table border="1" width="70%" align="center">
+    <thead>
+    <tr>
+        <td>id</td>
+        <td>书籍名称</td>
+        <td>书籍简介</td>
+        <td>类型</td>
+        <td>上市时间</td>
+    </tr>
+    </thead>
+    <tbody>
+    <if condition="$infoData">
+        <foreach name="infoData" item="v">
+            <tr>
+                <td>{$v['i_b_id']}</td>
+                <td>{$v['b_bookname']}</td>
+                <td>{$v['i_brief']}</td>
+                <td>{$v['b_type']}</td>
+                <td>{:(date('Y年m月d日',strtotime($v['i_registe_date'])))}</td>
+            </tr>
+        </foreach>
+    <else/>
+        <tr><td colspan="5">暂无数据</td></tr>
+    </if>
+    <tr>
+        <td colspan="5"><a href="{:U('Book/home')}">返回</a></td>
+    </tr>
+    </tbody>
+</table>
+<h2>用户评论</h2>
+<table border="1" width="40%" align="center">
+    <tr>
+        <td>昵称</td>
+        <td>评论</td>
+        <td>时间</td>
+    </tr>
+    <if condition="$commentData">
+    <foreach name="commentData" item="v">
+        <tr>
+            <td>{$v['u_user']}</td>
+            <td>{$v['c_msg']}</td>
+            <td>{:(date('Y年m月d日',strtotime($v['c_date'])))}</td>
+        </tr>
+    </foreach>
+    <else/>
+        <tr>
+            <td colspan="3">暂无评价</td>
+        </tr>
+    </if>
+</table>
+<h2>我要评论</h2>
+<form action="{:U('Book/talk')}" method="post">
+    <input type="hidden" value="{$c_b_id}" name="id">
+    <textarea type="text" placeholder="输入评论" cols="30" rows="5" name="talkMsg"></textarea><br/><button type="submit">提交</button>
+</form>
+<a href="{:U('Page/index')}">查看所有书籍评论</a>
+</body>
+</html>
